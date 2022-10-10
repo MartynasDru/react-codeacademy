@@ -1,23 +1,14 @@
-import logo from './logo.svg';
+import { Button } from './Button/Button';
+import { Header } from './Header/Header';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Codeacademy.lt React paskaita!
-        </p>
-        <a
-          className="App-link"
-          href="https://codeacademy.lt/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Codeacademy.lt
-        </a>
-      </header>
+      <Header />
+      <Button type="secondary">Click me!</Button>
+      <Button type="secondary">Press</Button>
+      <Button type="primary">I am first button <span>123</span></Button>
     </div>
   );
 }
