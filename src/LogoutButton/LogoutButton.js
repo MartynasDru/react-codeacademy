@@ -1,0 +1,1 @@
+export const LogoutButton = ({ onClick }) => <button onClick={onClick}>Logout</button>;
