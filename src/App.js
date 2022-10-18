@@ -1,12 +1,18 @@
+import { useState } from 'react';
 import './App.css';
-import { ContactsPage } from './ContactsPage/ContactsPage';
-import { HomePage } from './HomePage/HomePage';
+import { Counter } from './Counter/Counter';
 
 function App() {
+  const [isCounterVisible, setIsCounterVisible] = useState(true);
+
+  const handleToggleCounter = () => {
+    setIsCounterVisible(!isCounterVisible);
+  }
+
   return (
     <div className="App">
-      <HomePage />
-      <ContactsPage />
+      <button onClick={handleToggleCounter}>Toggle Counter</button>
+      {isCounterVisible &&  <Counter />}
     </div>
   );
 }
