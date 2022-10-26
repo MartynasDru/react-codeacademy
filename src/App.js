@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { filterPosts } from './utils';
 import './App.css';
 
 function App() {
@@ -18,17 +17,20 @@ function App() {
 
   return (
     <div className="App">
-      <input onChange={handleInputChange} />
-      {
-        posts
-          .filter((post) => post.title.indexOf(searchInputValue) >= 0)
-          .map((post) => (
-            <div key={post.id}>
-              <h2>{post.title}</h2>
-              <p>{post.body}</p>
-            </div>
-          ))
-      }
+      <input className="search-input" onChange={handleInputChange} />
+      <div className="posts-wrapper">
+        {
+          posts
+            .filter((post) => post.title.indexOf(searchInputValue) >= 0)
+            .map((post) => (
+              <div className="post" key={post.id}>
+                <h2>{post.title}</h2>
+                <p>{post.body}</p>
+                <button>Test</button>
+              </div>
+            ))
+        }
+      </div>
     </div>
   );
 }
