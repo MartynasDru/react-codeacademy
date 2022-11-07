@@ -1,13 +1,9 @@
-import { Wrapper, Title } from './AboutPageStyled';
-
-export const AboutPage = () => {
-
-    const randomNumber = Math.random() * 100;
-
+const AboutPage = () => {
     return (
-        <Wrapper>
-            {/* <h1 className={styles.title}>About page</h1> */}
-            <Title randomNumber={randomNumber}>About page</Title>
-        </Wrapper>
+        <div>
+            <h1>About page</h1>
+        </div>
     )
 }
+
+export default AboutPage;
