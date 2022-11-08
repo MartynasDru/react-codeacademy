@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { RouteSuspense } from './components/RouteSuspense/RouteSuspense';
 import { PageLayout } from './components/PageLayout/PageLayout';
@@ -14,37 +14,44 @@ const ContactsPage = React.lazy(() => import('./views/ContactsPage/ContactsPage'
 const AboutPage = React.lazy(() => import('./views/AboutPage/AboutPage'));
 const LoginPage = React.lazy(() => import('./views/LoginPage/LoginPage'));
 
+export const ThemeContext = createContext();
+
 function App() {
   const [user, setUser] = useState(null);
+  const [isDark, setIsDark] = useState();
 
   const handleLogin = (username) => setUser({ username });
 
+  const handleThemeChange = () => setIsDark(!isDark);
+
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<PageLayout user={user} />}>
-          <Route index element={
+      <ThemeContext.Provider value={{ isDark, changeTheme: handleThemeChange }}>
+        <Routes>
+          <Route path="/" element={<PageLayout user={user} />}>
+            <Route index element={
+              <RouteSuspense>
+                <HomePage />
+              </RouteSuspense>
+            } />
+            <Route path="/contacts" element={
+              <RouteSuspense>
+                <ContactsPage />
+              </RouteSuspense>
+            } />
+            <Route path="/about" element={
+              <RouteSuspense>
+                <AboutPage />
+              </RouteSuspense>
+            } />
+          </Route>
+          <Route path="/login" element={
             <RouteSuspense>
-              <HomePage />
+              <LoginPage onLogin={handleLogin} />
             </RouteSuspense>
           } />
-          <Route path="/contacts" element={
-            <RouteSuspense>
-              <ContactsPage />
-            </RouteSuspense>
-          } />
-          <Route path="/about" element={
-            <RouteSuspense>
-              <AboutPage />
-            </RouteSuspense>
-          } />
-        </Route>
-        <Route path="/login" element={
-          <RouteSuspense>
-            <LoginPage onLogin={handleLogin} />
-          </RouteSuspense>
-        } />
-      </Routes>
+        </Routes>
+      </ThemeContext.Provider>
     </div>
   );
 }
