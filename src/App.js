@@ -26,7 +26,9 @@ function App() {
 
   return (
     <div className="App">
-      <ThemeContext.Provider value={{ isDark, changeTheme: handleThemeChange }}>
+      <ThemeContext.Provider 
+        value={{ isDark, changeTheme: handleThemeChange, themeColor: 'yellow' }}
+      >
         <Routes>
           <Route path="/" element={<PageLayout user={user} />}>
             <Route index element={

@@ -21,13 +21,15 @@ const lightStyle = {
 };
 
 export const Navigation = ({ onLogout }) => {
-    const { isDark, changeTheme } = useContext(ThemeContext);
+    const { isDark, changeTheme, themeColor } = useContext(ThemeContext);
     const navigate = useNavigate();
 
     const handleLogout = () => {
         onLogout();
         navigate('/login');
     }
+
+    const buttonStyle = { backgroundColor: themeColor };
 
     return (
         <div 
@@ -39,8 +41,8 @@ export const Navigation = ({ onLogout }) => {
             {/* {location.pathname !== '/' && <Link to="/">Home</Link>} */}
             <Link to="/">Home</Link>
             <Link to="/contacts">Contacts</Link>
-            <button onClick={handleLogout}>Logout</button>
-            <button onClick={changeTheme}>Change theme</button>
+            <button style={buttonStyle} onClick={handleLogout}>Logout</button>
+            <button style={buttonStyle} onClick={changeTheme}>Change theme</button>
         </div>
     )
 }

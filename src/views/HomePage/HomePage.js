@@ -1,13 +1,30 @@
-import { Link } from 'react-router-dom';
-import styles from './home-page.module.scss';
+import { useReducer } from 'react';
+import { Buttons } from './Buttons';
+
+export const ACTION_TYPES = {
+    INCREMENT: 'increment',
+    DECREMENT: 'decrement'
+}
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case ACTION_TYPES.INCREMENT:
+            return state + 1;
+        case ACTION_TYPES.DECREMENT:
+            return state - 1;
+        default:
+            return state;
+    }
+};
 
 const HomePage = () => {
+    const [count, dispatch] = useReducer(reducer, 0);
+    // const [count, setCount] = useState(0);
+
     return (
         <div>
-            <Link to="/contacts">
-                <img src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" />
-            </Link>
-            <h1 className={styles.title}>Home page</h1>
+            <h1>{count}</h1>
+            <Buttons dispatch={dispatch} />
         </div>
     )
 };
