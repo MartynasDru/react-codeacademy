@@ -27,6 +27,12 @@ export const Button = ({ variant, children, disabled }) => {
     }
 
     return (
-        <button style={style} disabled={disabled}>{children}</button>
+        <button 
+            data-testid="button"
+            style={style} 
+            disabled={disabled}
+        >
+            {children}
+        </button>
     )
 }
